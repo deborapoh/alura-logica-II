@@ -1,0 +1,43 @@
+<canvas width='600' height='400'></canvas>
+<br>
+Escolha uma cor: <input type='color'>
+
+<script>
+
+    var tela = document.querySelector('canvas');
+    var paleta = document.querySelector('input');
+    var pincel = tela.getContext('2d');
+
+    pincel.fillStyle = 'grey';
+    pincel.fillRect(0, 0, 600, 400);
+
+    var pintou = false;
+
+    //FUNÇÕES
+    function desenharCirculo(evento) {
+        if (pintou) {
+            var x = evento.pageX - tela.offsetLeft;
+            var y = evento.pageY - tela.offsetTop; 
+            
+            pincel.fillStyle = paleta.value;
+            pincel.beginPath();
+            pincel.arc(x, y, 10, 0, 2*Math.PI);
+            pincel.fill(); 
+        }
+        console.log(x + ', ' + y);        
+    }
+
+    function habilitarPintura() {
+        pintou = true;
+    }
+
+    function desabilitarPintura() {
+        pintou = false;
+    }
+    
+    //CHAMADAS 
+    tela.onmousemove = desenharCirculo;
+    tela.onmousedown = habilitarPintura;
+    tela.onmouseup = desabilitarPintura;
+
+</script>

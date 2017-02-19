@@ -1,0 +1,57 @@
+<canvas width='600' height='400'></canvas>
+
+<script>
+
+    var tela = document.querySelector('canvas');
+    var pincel = tela.getContext('2d');
+
+    pincel.fillStyle = 'grey';
+    pincel.fillRect(0, 0, 600, 400);
+
+    var temp = 0;
+    var cores = ['blue', 'red', 'green'];
+    var corAtual = cores[temp];
+    var raio = 10;
+    var pintou = false;
+
+    //FUNÇÕES
+    function desenharCirculo(evento) {
+        if (pintou) {
+            var x = evento.pageX - tela.offsetLeft;
+            var y = evento.pageY - tela.offsetTop; 
+            
+            pincel.fillStyle = corAtual;
+            pincel.beginPath();
+            pincel.arc(x, y, raio, 0, 2*Math.PI);
+            pincel.fill(); 
+        }
+        console.log(x + ', ' + y);        
+    }
+
+    function mudarCor() {
+        if (temp == 2) {
+            temp = -1;
+        }
+
+        temp++;
+        corAtual = cores[temp];
+        
+        return false;
+    }
+
+    function habilitarPintura() {
+        pintou = true;
+    }
+
+    function desabilitarPintura() {
+        pintou = false;
+    }
+    
+    //CHAMADAS 
+    tela.onmousemove = desenharCirculo;
+    tela.oncontextmenu = mudarCor;
+    tela.onmousedown = habilitarPintura;
+    tela.onmouseup = desabilitarPintura;
+
+
+</script>

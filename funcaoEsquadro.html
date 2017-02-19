@@ -1,0 +1,27 @@
+<canvas width='600' height='400'></canvas>
+
+<script>
+
+	var tela = document.querySelector('canvas');
+	var pincel = tela.getContext('2d');
+
+	function desenharTriangulo(xa, ya, xc, yc, cor) {
+
+		pincel.fillStyle = cor;
+		pincel.beginPath();
+		pincel.moveTo(xa, ya);
+		pincel.lineTo(xa, yc);
+		pincel.lineTo(xc, yc);
+		pincel.fill();
+
+	}
+
+	function desenharEsquadro(xa, ya, xc, yc, cor) {
+
+		desenharTriangulo(xa, ya, xc, yc, cor);
+		desenharTriangulo(xa+50, ya+125, xc-125, yc-50, 'white');
+	}
+
+	desenharEsquadro(50, 50, 400, 400, 'black');
+
+</script>
